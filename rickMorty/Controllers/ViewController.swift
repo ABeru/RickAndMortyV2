@@ -7,11 +7,13 @@
 
 import UIKit
 import LUAutocompleteView
+import SkeletonView
 class ViewController: UIViewController {
     @IBOutlet private weak var searchName: UITextField!
     @IBOutlet private weak var epCollection: UICollectionView!
     private let autoCompView = LUAutocompleteView()
     var vm = EpsViewModel()
+    var n = true
     private var datasource: CollViewDataSource<epCollCell,EpisodeRes>!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +22,13 @@ class ViewController: UIViewController {
         loadEpisodes()
         Display()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        epCollection.isSkeletonable = n
+        epCollection.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .green), animation: nil, transition: .crossDissolve(0.2))
+        SkeletonAppearance.default.multilineHeight = 140
+    }
+   
     private func Assign() {
         epCollection.assignLayout(size: self.view.frame.width, height: 140)
         epCollection.delegate = self
@@ -40,6 +49,8 @@ class ViewController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 self?.datasource.updateItems((self?.vm.episodes)!)
                 self?.epCollection.reloadData()
+                self?.epCollection.hideSkeleton()
+                self?.n = false
             }
         })
         
@@ -65,6 +76,7 @@ extension ViewController: LUAutocompleteViewDataSource {
     func autocompleteView(_ autocompleteView: LUAutocompleteView, elementsFor text: String, completion: @escaping ([String]) -> Void) {
         let elementsThatMatchInput = vm.filtered.map{$0.name}.filter { $0.lowercased().contains(text.lowercased())
         }
+        
         completion(elementsThatMatchInput)
     }
 }

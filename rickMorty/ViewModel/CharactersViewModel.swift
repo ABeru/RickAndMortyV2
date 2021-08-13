@@ -11,7 +11,9 @@ class CharactersViewModel {
     var filtered = [CharactersM]()
     var charIds: [Int]
     var selectedIndex = 0
+    var passedArray = [CharactersM]()
     var episode: EpisodeRes
+    var datasource: CollViewDataSource<CharactersCell, CharactersM>!
     init(charIds: [Int], episode: EpisodeRes) {
         self.charIds = charIds
         self.episode = episode
@@ -26,29 +28,20 @@ class CharactersViewModel {
         }
     }
     func fetchChar(completion: @escaping () -> Void) {
-        let charUrl = Constants.Urls.urlForChar(ids: charIds)
-        let charResource = Resource<[CharactersM]>(url: charUrl) { data in
-            let charResp = try? JSONDecoder().decode([CharactersM].self, from: data)
-            return charResp
-        }
-        ApiServices.load(resource: charResource) { (result) in
+        Repos.callApiForChar(ids: charIds, completion:{ (result) in
             if result != nil {
                 self.characters.append(contentsOf: result!)
+                self.passedArray = self.characters
               completion()
             }
-        }
+        })
         
     }
     func filterChar(for query: String) {
-        let filterURL = Constants.Urls.urlForFilterChar(query: query)
-        let filterResource = Resource<FilterM>(url: filterURL) { data in
-            let filterResp = try? JSONDecoder().decode(FilterM.self, from: data)
-            return filterResp
-        }
-        ApiServices.load(resource: filterResource) { (result) in
+        Repos.callApiForFilterChar(query: query, completion: { (result) in
             if result != nil {
                 self.filtered.append(contentsOf: result!.results)
             }
-        }
-    }
+        })
+}
 }

@@ -30,29 +30,21 @@ class EpsViewModel {
     }
     
     func fetchEpisodes(completion: @escaping () -> ()) {
-        let charUrl = Constants.Urls.urlForEpisodes()
-        let charResource = Resource<Episodes>(url: charUrl) { data in
-            let charResp = try? JSONDecoder().decode(Episodes.self, from: data)
-            return charResp
-        }
-        ApiServices.load(resource: charResource) { (result) in
+        Repos.callApiForEpisodes(completion: { result in
             if result != nil {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.episodes.append(contentsOf: result!.results)
                 completion()
             }
-        }
+            }
+        })
     }
     func filterEp(for query: String) {
-        let filterURL = Constants.Urls.urlForFilterEp(query: query)
-        let filterResource = Resource<Episodes>(url: filterURL) { data in
-            let filterResp = try? JSONDecoder().decode(Episodes.self, from: data)
-            return filterResp
-        }
-        ApiServices.load(resource: filterResource) { (result) in
+        Repos.callApiForFilterEp(query: query, completion: { result in
             if result != nil {
                 self.filtered.append(contentsOf: result!.results)
             }
-        }
+        })
     }
 }
 

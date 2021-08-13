@@ -52,40 +52,25 @@ class DetailsViewModel {
         return intArr
     }
     func fetchSingleEpisode(id: Int, completion: @escaping (EpisodeRes) -> Void) {
-        let charUrl = Constants.Urls.urlForSingleEp(id: id)
-        let charResource = Resource<EpisodeRes>(url: charUrl) { data in
-            let charResp = try? JSONDecoder().decode(EpisodeRes.self, from: data)
-            return charResp
-        }
-        ApiServices.load(resource: charResource) { (result) in
+        Repos.callApiForSingleEp(id: id, completion: { result in
             if result != nil {
                 completion(result!)
             }
-        }
+        })
     }
     func fetchEpisodes(ids: [Int], completion: @escaping ([EpisodeRes]) -> Void) {
-            let charUrl = Constants.Urls.urlForEpisode(ids: ids)
-            let charResource = Resource<[EpisodeRes]>(url: charUrl) { data in
-                let charResp = try? JSONDecoder().decode([EpisodeRes].self, from: data)
-                return charResp
+        Repos.callApiForEpisode(ids: ids, completion: { result in
+            if result != nil {
+                completion(result!)
             }
-            ApiServices.load(resource: charResource) { (result) in
-                if result != nil {
-                    completion(result!)
-                }
-            }
+        })
         }
     func filterChar(for query: String) {
-        let filterURL = Constants.Urls.urlForFilterChar(query: query)
-        let filterResource = Resource<FilterM>(url: filterURL) { data in
-            let filterResp = try? JSONDecoder().decode(FilterM.self, from: data)
-            return filterResp
-        }
-        ApiServices.load(resource: filterResource) { (result) in
+        Repos.callApiForFilterChar(query: query, completion: { result in
             if result != nil {
                 self.chars.append(contentsOf: result!.results)
             }
-        }
+        })
     }
 
 }

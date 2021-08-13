@@ -1,16 +1,30 @@
 PODS:
+  - Alamofire (5.4.3)
   - LUAutocompleteView (4.0.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SkeletonView (1.21.2)
 
 DEPENDENCIES:
+  - Alamofire
   - LUAutocompleteView
+  - SDWebImage
+  - SkeletonView
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - LUAutocompleteView
+    - SDWebImage
+    - SkeletonView
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   LUAutocompleteView: 604edbbb358d77c8fff4b86137db76a38eb4beda
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SkeletonView: a085533443fed0198309f1979780afb6e80eaedd
 
-PODFILE CHECKSUM: 12764ded96a4b8a65fd1f8103b8b73bba37831fd
+PODFILE CHECKSUM: 9f9ccc28f985aa71fd21c90f69440bc66dde6d62
 
 COCOAPODS: 1.10.1

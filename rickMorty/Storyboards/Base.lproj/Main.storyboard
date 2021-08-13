@@ -51,6 +51,9 @@
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="28"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="December 2, 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-QV-eRA">
                                                     <rect key="frame" x="0.0" y="109" width="177" height="19.5"/>
@@ -60,6 +63,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" systemColor="systemGray4Color"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pilot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEi-8O-0jk">
                                                     <rect key="frame" x="0.0" y="71" width="177" height="34"/>
@@ -69,6 +75,9 @@
                                                     <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="31"/>
                                                     <color key="textColor" red="0.99990516901016235" green="1" blue="0.99987047910690308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -83,9 +92,15 @@
                                                 <constraint firstItem="Smb-QV-eRA" firstAttribute="top" secondItem="GEi-8O-0jk" secondAttribute="bottom" constant="4" id="grT-AP-GZd"/>
                                                 <constraint firstItem="k71-nc-bKN" firstAttribute="leading" secondItem="N0w-Ho-nzq" secondAttribute="leading" id="vAn-BB-sxZ"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" systemColor="labelColor"/>
                                         <size key="customSize" width="177" height="140"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="airDate" destination="Smb-QV-eRA" id="Sdq-rJ-xmZ"/>
                                             <outlet property="episode" destination="k71-nc-bKN" id="N1B-BW-UO8"/>
@@ -93,6 +108,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </collectionView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search for Episode" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpe-HZ-kjW">
                                 <rect key="frame" x="31" y="137.5" width="353" height="34"/>

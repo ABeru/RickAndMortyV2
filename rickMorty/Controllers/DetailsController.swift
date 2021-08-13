@@ -7,6 +7,7 @@
 
 import UIKit
 import LUAutocompleteView
+import SDWebImage
 class DetailsController: UIViewController {
     @IBOutlet private weak var charImg: UIImageView!
     @IBOutlet private weak var status: UILabel!
@@ -50,11 +51,7 @@ class DetailsController: UIViewController {
             status.textColor = .green
         }
         status.text = vm.charDetail.status
-        vm.charDetail.image.downloadImage { (image) in
-            DispatchQueue.main.async { [weak self] in
-                self?.charImg.image = image
-            }
-        }
+        charImg.sd_setImage(with: URL(string: vm.charDetail.image))
     }
     @IBAction private func Back(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)

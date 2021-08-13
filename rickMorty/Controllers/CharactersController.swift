@@ -7,6 +7,7 @@
 
 import UIKit
 import LUAutocompleteView
+import SDWebImage
 class CharactersController: UIViewController {
     @IBOutlet private weak var charColl: UICollectionView!
     @IBOutlet private weak var season: UILabel!
@@ -44,11 +45,7 @@ class CharactersController: UIViewController {
                 cell.charStatus.textColor = .green
             }
             cell.charStatus.text = vm.status
-            vm.image.downloadImage{(image) in
-                DispatchQueue.main.async {
-                    cell.charImg.image = image
-                }
-            }
+            cell.charImg.sd_setImage(with: URL(string: vm.image))
             }
     
         charColl.dataSource = datasource
@@ -66,7 +63,8 @@ class CharactersController: UIViewController {
     }
     override  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let DetailsVc = segue.destination as? DetailsController{
-            DetailsVc.vm = DetailsViewModel(charDetail: vm.characters[vm.selectedIndex])
+            DetailsVc.vm = DetailsViewModel(charDetail: vm.passedArray[vm.selectedIndex])
+            vm.passedArray = vm.characters
         }
     }
     @IBAction private func searchText(_ sender: UITextField) {
@@ -91,7 +89,7 @@ extension CharactersController: LUAutocompleteViewDataSource {
 extension CharactersController: LUAutocompleteViewDelegate {
     func autocompleteView(_ autocompleteView: LUAutocompleteView, didSelect text: String) {
         vm.selectedIndex = vm.filtered.firstIndex(where: {$0.name == text})!
-        vm.characters = vm.filtered
+        vm.passedArray = vm.filtered
         searchField.text = ""
         performSegue(withIdentifier: "goDetails", sender: nil)
     }
